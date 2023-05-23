@@ -1,4 +1,4 @@
-// const fs = require('fs');
+// const fs = require('fs')
 // const path = require('path');
 
 // folder created
@@ -43,12 +43,6 @@
 //     if (err) throw err.message
 //     console.log("o'chdi");
 // })
-
-
-// fs.rmdir(path.join(__dirname, 'papka'), err => {
-// 	if (err) throw err;
-// 	console.log('Folder deleted...');
-// });
 
 
 // fs.rename(path.join(__dirname, "node"), path.join(__dirname,"newpapka"), err => {
