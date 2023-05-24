@@ -9,6 +9,7 @@ class Books {
 		this.author = author;
 		this.price = price;
 		this.description = description;
+		this.id = uuid.v4()
 	}
 
 	toJSON() {
@@ -16,14 +17,15 @@ class Books {
 			title: this.title, // Algebra
 			author: this.author, // Ali
 			price: this.price, // 200
-			description: this.description, //5 sinflar uchun kitob
+			description: this.description,//5 sinflar uchun kitob
+			id: this.id
 		};
 	}
 
 // data bazaga malumotni saqlash
 	async save() {
 		const books = await this.getAll();
-		console.log(books);
+		// console.log(books);
 		books.push(this.toJSON());
 
 		return new Promise((resolve, reject) => {
@@ -58,9 +60,41 @@ class Books {
 		});
 	}
 
-	getById() {}
+	async getById(id) {
+		const books = await this.getAll();
+		return books.find((data) => data.id === id)
+	}
 
-	delete() {}
+	async delete(id) {
+		const books = await this.getAll();
+		const newbook = []
+		books.forEach(data => {
+
+			// harbitta kitob 
+			if(data.id !== id) { // kelgan kitobni id si kelayotgan id ga teng bolmasa if sharti bajariladi
+				newbook.push(data) // newbook ga qo'shib qo'yyabti
+			}
+		});
+
+		return new Promise((resolve, reject) => {
+			fs.writeFile(
+				path.join(__dirname, '..', 'data.json'),
+				JSON.stringify(newbook),
+				err => {
+					if (err) {
+						reject(err);
+					} else {
+						resolve(console.log('Deleted successfully'));
+					}
+				}
+			);
+		});
+		
+	}
+
+	async update(id, data) {
+	
+	}
 }
 
 // BoyOta
