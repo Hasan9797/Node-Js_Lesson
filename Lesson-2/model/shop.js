@@ -97,7 +97,4 @@ class Books {
 	}
 }
 
-// BoyOta
-// const bok = new Books();
-
 module.exports = Books;
